@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    imagename = "prayags/java-maven-app"
+    imagename = "ndefrutitus/java-maven-app"
     registryCredential = 'dockerhub-id'
     dockerImage = ''
   }
@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git([url: 'https://github.com/prayag-sangode/java-maven-app.git', branch: 'main', credentialsId: 'github-id'])
+        git([url: 'https://github.com/gazypendragon/java-maven-app.git', branch: 'main', credentialsId: 'github-id'])
 
       }
     }
@@ -39,7 +39,7 @@ pipeline {
     }
     stage('Deploy HTML App on microk8s') {
       steps{
-       withKubeConfig([credentialsId: 'microk8s-id', serverUrl: 'https://10.160.0.2:16443']) {
+       withKubeConfig([credentialsId: 'microk8s-id', serverUrl: 'https://10.180.0.2:16443']) {
         sh 'kubectl apply -f deploy.yaml'
      }
    }
